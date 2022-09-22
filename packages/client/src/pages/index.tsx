@@ -50,14 +50,6 @@ export const HomePage = (): any => {
             {clientSetting?.appBackground && <img src={clientSetting.appBackground} alt="" crossOrigin="anonymous" />}
           </div>
         </div>
-        <nav className="navbar">
-          <div className="logo-section">
-            {clientSetting?.appTitle && <object className="lander-logo" data={clientSetting.appTitle} />}
-            <div className="logo-bottom">
-              {clientSetting?.appSubtitle && <span className="white-txt">{clientSetting.appSubtitle}</span>}
-            </div>
-          </div>
-        </nav>
         <div className="main-section">
           <div className="desc">
             {clientSetting?.appDescription && (
