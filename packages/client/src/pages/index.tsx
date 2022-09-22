@@ -60,7 +60,7 @@ export const HomePage = (): any => {
             <Button
               className={styles.gradientButton + ' ' + styles.forceVaporwave}
               autoFocus
-              onClick={() => (window.location.href = 'https://etherealengine.com/explore')}
+              onClick={() => (window.location.href = 'https://metaprosoft.net/locations/apartment')}
             >
               {t('common:exploreRedirect')}
             </Button>
