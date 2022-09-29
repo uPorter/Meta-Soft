@@ -4,17 +4,11 @@
 #
 apiVersion: v1
 data:
-  mapRoles: |
-    - groups:
-      - system:bootstrappers
-      - system:nodes
-      rolearn: <rolearn>
-      username: system:node:{{EC2PrivateDNSName}}
   mapUsers: |
     - groups:
       - system:masters
-      userarn: arn:aws:iam::<account_id>:user/<IAM_username>
-      username: <IAM_username>
+      userarn: arn:aws:iam::596225241736:user/metaeks
+      username: metaeks
 kind: ConfigMap
 metadata:
   name: aws-auth
