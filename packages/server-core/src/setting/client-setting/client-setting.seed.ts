@@ -17,10 +17,10 @@ export const clientSeed = {
       favicon16px: '/favicon-16x16.png',
       icon192px: '/android-chrome-192x192.png',
       icon512px: '/android-chrome-512x512.png',
-      appBackground: 'static/main-background.png',
+      appBackground: '',
       appTitle: 'static/ethereal_mark.png',
-      appSubtitle: 'EtherealEngine.org',
-      appDescription: 'FREE, OPEN, & INTEROPERABLE IMMERSIVE WEB TECHNOLOGY',
+      appSubtitle: 'Metaprosoft',
+      appDescription: 'Metaprosoft Test Subject',
       appSocialLinks: JSON.stringify([
         { icon: 'static/discord.svg', link: 'https://discord.gg/xrf' },
         { icon: 'static/github.svg', link: 'https://github.com/XRFoundation' }
