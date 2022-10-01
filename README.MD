@@ -41,8 +41,6 @@ technology and shared simulations should be as easy and natural as making a webs
 - WebGL client deployable to iOS, Android and desktop
 - Free, open source, MIT and Apache 2.0-licensed
 
-## Demos
-
 Guest Demos
 
 - ***[Apartment - CCO from Sketchfab](https://app.etherealengine.com/location/apartment)***

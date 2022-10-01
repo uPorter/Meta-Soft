@@ -75,8 +75,8 @@ export const getClientSetting = async () => {
         icon512px: dbClient.icon512px
       }) || {
         logo: './logo.svg',
-        title: 'XREngine',
-        url: 'https://local.theoverlay.io',
+        title: 'Metaprosoft',
+        url: 'https://dev.metaprosoft.net',
         releaseName: 'local',
         siteDescription: 'Connected Worlds for Everyone',
         favicon32px: '/favicon-32x32.png',
