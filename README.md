@@ -10,8 +10,6 @@
   - [Demos](#demos)
 - [Install](#advanced-development-install)
   - [Pre-Requisites](#pre-requisites)
-  - [Getting Started](#getting-started)
-- [XRE XRModule](#xre-xrmodule)
 - [Usage](#usage)
 - [Contributing](#contributing)
   - [Let's build it together](#lets-build-it-together)
