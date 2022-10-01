@@ -50,6 +50,14 @@ export const HomePage = (): any => {
             {clientSetting?.appBackground && <img src={clientSetting.appBackground} alt="" crossOrigin="anonymous" />}
           </div>
         </div>
+        <nav className="navbar">
+          <div className="logo-section">
+            {clientSetting?.appTitle && <object className="lander-logo" data={clientSetting.appTitle} />}
+            <div className="logo-bottom">
+              {clientSetting?.appSubtitle && <span className="white-txt">{clientSetting.appSubtitle}</span>}
+            </div>
+          </div>
+        </nav>
         <div className="main-section">
           <div className="desc">
             {clientSetting?.appDescription && (
@@ -60,7 +68,7 @@ export const HomePage = (): any => {
             <Button
               className={styles.gradientButton + ' ' + styles.forceVaporwave}
               autoFocus
-              onClick={() => (window.location.href = 'https://metaprosoft.net/locations/apartment')}
+              onClick={() => (window.location.href = 'https://etherealengine.com/explore')}
             >
               {t('common:exploreRedirect')}
             </Button>
@@ -74,13 +82,14 @@ export const HomePage = (): any => {
                     top: 0px;
                     left: 0px;
                     width: 100%;
+                    min-width: 420px;
                     transform: none;
                     pointer-events: auto;
                 }
               `}
             </style>
             {selectedMenu === Views.Profile && (
-              <ProfileMenu changeActiveMenu={(type) => setSelectedMenu(type ? type : Views.Settings)} />
+              <ProfileMenu changeActiveMenu={(type) => setSelectedMenu(type ? type : Views.Profile)} />
             )}
             {selectedMenu === Views.Settings && (
               <SettingMenu changeActiveMenu={(type) => setSelectedMenu(type ? type : Views.Profile)} />
