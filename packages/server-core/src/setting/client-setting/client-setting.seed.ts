@@ -4,10 +4,10 @@ export const clientSeed = {
   path: 'client-setting',
   templates: [
     {
-      logo: process.env.APP_LOGO,
-      title: process.env.APP_TITLE,
+      logo: 'static/github.svg',
+      title: 'ProsoftVR',
       releaseName: process.env.RELEASE_NAME || 'local',
-      siteDescription: process.env.SITE_DESC,
+      siteDescription: 'Prosoftvr Metaverse Test',
       url:
         process.env.APP_URL ||
         (process.env.VITE_LOCAL_BUILD
