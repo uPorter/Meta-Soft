@@ -1,9 +1,9 @@
 import { EventQueue } from '@dimforge/rapier3d-compat'
 import * as bitecs from 'bitecs'
-import { Object3D, OrthographicCamera, PerspectiveCamera, Raycaster, Scene, Vector3 } from 'three'
+import { AxesHelper, Object3D, Raycaster, Scene } from 'three'
 
 import { NetworkId } from '@xrengine/common/src/interfaces/NetworkId'
-import { ComponentJson, EntityJson, SceneJson } from '@xrengine/common/src/interfaces/SceneInterface'
+import { ComponentJson, SceneJson } from '@xrengine/common/src/interfaces/SceneInterface'
 import { UserId } from '@xrengine/common/src/interfaces/UserId'
 import multiLogger from '@xrengine/common/src/logger'
 import { getState } from '@xrengine/hyperflux'
@@ -19,13 +19,17 @@ import { InputAlias } from '../../input/types/InputAlias'
 import { Network } from '../../networking/classes/Network'
 import { NetworkObjectComponent } from '../../networking/components/NetworkObjectComponent'
 import { PhysicsWorld } from '../../physics/classes/Physics'
-import { addObjectToGroup, GroupComponent } from '../../scene/components/GroupComponent'
+import { addObjectToGroup } from '../../scene/components/GroupComponent'
 import { NameComponent } from '../../scene/components/NameComponent'
 import { Object3DComponent } from '../../scene/components/Object3DComponent'
 import { PortalComponent } from '../../scene/components/PortalComponent'
 import { VisibleComponent } from '../../scene/components/VisibleComponent'
 import { ObjectLayers } from '../../scene/constants/ObjectLayers'
-import { setTransformComponent } from '../../transform/components/TransformComponent'
+import {
+  setLocalTransformComponent,
+  setTransformComponent,
+  TransformComponent
+} from '../../transform/components/TransformComponent'
 import { Widget } from '../../xrui/Widgets'
 import {
   addComponent,
@@ -34,16 +38,16 @@ import {
   defineQuery,
   EntityRemovedComponent,
   getComponent,
-  hasComponent
+  hasComponent,
+  setComponent
 } from '../functions/ComponentFunctions'
 import { createEntity } from '../functions/EntityFunctions'
-import { initializeEntityTree } from '../functions/EntityTreeFunctions'
+import { EntityTree, initializeEntityTree } from '../functions/EntityTree'
 import { SystemInstance } from '../functions/SystemFunctions'
 import { SystemUpdateType } from '../functions/SystemUpdateType'
 import { Engine } from './Engine'
 import { EngineState } from './EngineState'
 import { Entity } from './Entity'
-import EntityTree from './EntityTree'
 
 const TimerConfig = {
   MAX_DELTA_SECONDS: 1 / 10
@@ -58,17 +62,19 @@ export class World {
     Engine.instance.worlds.push(this)
     Engine.instance.currentWorld = this
 
-    this.localOriginEntity = createEntity()
-    addComponent(this.localOriginEntity, NameComponent, { name: 'local-origin' })
-    setTransformComponent(this.localOriginEntity)
+    initializeEntityTree(this)
+
+    this.originEntity = createEntity()
+    addComponent(this.originEntity, NameComponent, { name: 'origin' })
+    setTransformComponent(this.originEntity)
+    setComponent(this.originEntity, VisibleComponent, true)
 
     this.cameraEntity = createEntity()
     addComponent(this.cameraEntity, NameComponent, { name: 'camera' })
     addComponent(this.cameraEntity, VisibleComponent, true)
     setTransformComponent(this.cameraEntity)
+    setLocalTransformComponent(this.cameraEntity, this.originEntity)
     addObjectToGroup(this.cameraEntity, addComponent(this.cameraEntity, CameraComponent, null).camera)
-
-    initializeEntityTree(this)
 
     /** @todo */
     // this.scene.matrixAutoUpdate = false
@@ -177,9 +183,9 @@ export class World {
   sceneEntity: Entity = NaN as Entity
 
   /**
-   * The reference space in which the local avatar, camera, and spatial inputs are positioned
+   * The xr origin reference space entity
    */
-  localOriginEntity: Entity = NaN as Entity
+  originEntity: Entity = NaN as Entity
 
   /**
    * The camera entity

@@ -15,6 +15,7 @@ import {
   MeshPhysicalMaterial,
   MeshStandardMaterial,
   Object3D,
+  RepeatWrapping,
   ShaderMaterial,
   SkinnedMesh,
   Texture,
@@ -24,7 +25,7 @@ import {
 import { isAbsolutePath } from '../../common/functions/isAbsolutePath'
 import { isClient } from '../../common/functions/isClient'
 import { Engine } from '../../ecs/classes/Engine'
-import { EntityTreeNode } from '../../ecs/classes/EntityTree'
+import { EntityTreeNode } from '../../ecs/functions/EntityTree'
 import { matchActionOnce } from '../../networking/functions/matchActionOnce'
 import loadVideoTexture from '../../renderer/materials/functions/LoadVideoTexture'
 import { EngineRenderer } from '../../renderer/WebGLRendererSystem'
@@ -316,6 +317,11 @@ const assetLoadCallback =
       if (asset.userData) asset.userData.type = assetType
 
       AssetLoader.processModelAsset(asset.scene, args)
+    }
+    if ([AssetClass.Image, AssetClass.Video].includes(assetClass)) {
+      const texture = asset as Texture
+      texture.wrapS = RepeatWrapping
+      texture.wrapT = RepeatWrapping
     }
 
     onLoad(asset)

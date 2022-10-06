@@ -1,3 +1,4 @@
+import { removeComponent } from 'bitecs'
 import {
   ArrowHelper,
   Box3Helper,
@@ -17,6 +18,7 @@ import {
   Object3D,
   PlaneGeometry,
   Quaternion,
+  RingGeometry,
   SkeletonHelper,
   SphereGeometry,
   TorusGeometry,
@@ -43,6 +45,12 @@ import InfiniteGridHelper from '../../scene/classes/InfiniteGridHelper'
 import Spline from '../../scene/classes/Spline'
 import { DirectionalLightComponent } from '../../scene/components/DirectionalLightComponent'
 import { EnvMapBakeComponent } from '../../scene/components/EnvMapBakeComponent'
+import {
+  addObjectToGroup,
+  GroupComponent,
+  removeGroupComponent,
+  removeObjectFromGroup
+} from '../../scene/components/GroupComponent'
 import { AudioNodeGroups, MediaElementComponent } from '../../scene/components/MediaComponent'
 import { MountPointComponent } from '../../scene/components/MountPointComponent'
 import { PointLightComponent } from '../../scene/components/PointLightComponent'
@@ -55,7 +63,8 @@ import { SpotLightComponent } from '../../scene/components/SpotLightComponent'
 import { ObjectLayers } from '../../scene/constants/ObjectLayers'
 import { setObjectLayers } from '../../scene/functions/setObjectLayers'
 import { TransformComponent } from '../../transform/components/TransformComponent'
-import { XRInputSourceComponent } from '../../xr/XRComponents'
+import { XRHitTestComponent, XRInputSourceComponent } from '../../xr/XRComponents'
+import { XRState } from '../../xr/XRState'
 import { DebugNavMeshComponent } from '../DebugNavMeshComponent'
 import { PositionalAudioHelper } from '../PositionalAudioHelper'
 
@@ -445,6 +454,7 @@ export default async function DebugHelpersSystem(world: World) {
       if (debugEnabled) {
         if (!helpersByEntity.ikExtents.has(entity)) {
           const debugHead = new Mesh(cubeGeometry, new MeshBasicMaterial({ color: new Color('red'), side: DoubleSide }))
+          if (entity === world.localClientEntity) debugHead.material.visible = false
           const debugLeft = new Mesh(cubeGeometry, new MeshBasicMaterial({ color: new Color('yellow') }))
           const debugRight = new Mesh(cubeGeometry, new MeshBasicMaterial({ color: new Color('blue') }))
           debugHead.visible = debugEnabled

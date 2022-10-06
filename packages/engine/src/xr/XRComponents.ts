@@ -2,7 +2,9 @@
 import { WebContainer3D } from '@etherealjs/web-layer/three/WebContainer3D'
 import { BufferGeometry, Group, Mesh, MeshBasicMaterial } from 'three'
 
-import { createMappedComponent } from '../ecs/functions/ComponentFunctions'
+import { hookstate } from '@xrengine/hyperflux/functions/StateFunctions'
+
+import { createMappedComponent, defineComponent } from '../ecs/functions/ComponentFunctions'
 import { QuaternionSchema, Vector3Schema } from '../transform/components/TransformComponent'
 
 export type XRGripButtonComponentType = {}
@@ -127,3 +129,48 @@ export const XRInputSourceComponent = createMappedComponent<XRInputSourceCompone
   'XRInputSourceComponent',
   XRInputSourceSchema
 )
+
+export const XRHitTestComponent = defineComponent({
+  name: 'XRHitTest',
+
+  onAdd: (entity) => {
+    return hookstate({
+      hitTestSource: null as XRHitTestSource | null,
+      hitTestResult: null as XRHitTestResult | null
+    })
+  },
+
+  onUpdate: (entity, component, json) => {
+    if (json.hitTestSource) component.hitTestSource.set(json.hitTestSource)
+  },
+
+  toJSON: () => {
+    return null! as {
+      hitTestSource: XRHitTestSource | null
+    }
+  }
+})
+
+export const XRAnchorComponent = defineComponent({
+  name: 'XRAnchor',
+
+  onAdd: (entity) => {
+    return hookstate({
+      anchor: null! as XRAnchor
+    })
+  },
+
+  onUpdate: (entity, component, json) => {
+    if (json.anchor) component.anchor.set(json.anchor)
+  },
+
+  onRemove: (entity, component) => {
+    component.anchor.value.delete()
+  },
+
+  toJSON: () => {
+    return null! as {
+      anchor: XRAnchor
+    }
+  }
+})

@@ -52,8 +52,6 @@ export function addObjectToGroup(entity: Entity, object: Object3D) {
 
   getComponent(entity, GroupComponent).push(obj)
 
-  if (!hasComponent(entity, TransformComponent)) setTransformComponent(entity)
-
   const transform = getComponent(entity, TransformComponent)
   const world = Engine.instance.currentWorld
   obj.position.copy(transform.position)
@@ -63,13 +61,21 @@ export function addObjectToGroup(entity: Entity, object: Object3D) {
   obj.matrix = transform.matrix
   obj.matrixWorld = transform.matrix
   obj.matrixWorldInverse = transform.matrixInverse
-  Engine.instance.currentWorld.scene.add(object)
+  if (object !== Engine.instance.currentWorld.scene) Engine.instance.currentWorld.scene.add(object)
 
   // sometimes it's convenient to update the entity transform via the Object3D,
   // so allow people to do that via proxies
   proxifyVector3WithDirty(TransformComponent.position, entity, world.dirtyTransforms, obj.position)
   proxifyQuaternionWithDirty(TransformComponent.rotation, entity, world.dirtyTransforms, obj.quaternion)
   proxifyVector3WithDirty(TransformComponent.scale, entity, world.dirtyTransforms, obj.scale)
+}
+
+export function removeGroupComponent(entity: Entity) {
+  if (hasComponent(entity, Object3DComponent)) removeComponent(entity, Object3DComponent)
+  if (hasComponent(entity, GroupComponent)) {
+    for (const obj of getComponent(entity, GroupComponent)) obj.removeFromParent()
+    removeComponent(entity, GroupComponent)
+  }
 }
 
 export function removeObjectFromGroup(entity: Entity, object: Object3D) {

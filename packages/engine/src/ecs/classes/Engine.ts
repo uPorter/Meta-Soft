@@ -58,8 +58,6 @@ export class Engine {
 
   isBot = false
 
-  isHMD = false
-
   /**
    * The current world
    */
@@ -72,7 +70,7 @@ export class Engine {
 
   publicPath = ''
 
-  xrFrame: XRFrame
+  xrFrame: XRFrame | null = null
 
   isEditor = false
 }
