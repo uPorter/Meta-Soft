@@ -22,8 +22,8 @@ export const clientSeed = {
       appSubtitle: 'prosoftvr.com',
       appDescription: 'Prosoftvr Metaverse Test',
       appSocialLinks: JSON.stringify([
-        { icon: 'static/discord.svg', link: '' },
-        { icon: 'static/github.svg', link: '' }
+        { icon: 'static/discord.svg', link: 'https://www.prosoftvr.com' },
+        { icon: 'static/github.svg', link: 'https://github.com/uPorter' }
       ]),
       themeSettings: JSON.stringify(defaultThemeSettings),
       themeModes: JSON.stringify(defaultThemeModes)
