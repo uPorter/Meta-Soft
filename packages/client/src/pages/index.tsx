@@ -46,9 +46,6 @@ export const HomePage = (): any => {
           />
         </Helmet>
         <div className="main-background">
-          <div className="img-container">
-            {clientSetting?.appBackground && <img src={clientSetting.appBackground} alt="" crossOrigin="anonymous" />}
-          </div>
         </div>
         <nav className="navbar">
           <div className="logo-section">
@@ -68,7 +65,7 @@ export const HomePage = (): any => {
             <Button
               className={styles.gradientButton + ' ' + styles.forceVaporwave}
               autoFocus
-              onClick={() => (window.location.href = 'https://etherealengine.com/explore')}
+              onClick={() => (window.location.href = 'https://metaprosoft.net/location/apartment')}
             >
               {t('common:exploreRedirect')}
             </Button>
