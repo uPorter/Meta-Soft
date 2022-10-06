@@ -19,11 +19,11 @@ export const clientSeed = {
       icon512px: '/android-chrome-512x512.png',
       appBackground: 'static/main-background.png',
       appTitle: 'static/ethereal_mark.png',
-      appSubtitle: 'EtherealEngine.org',
-      appDescription: 'FREE, OPEN, & INTEROPERABLE IMMERSIVE WEB TECHNOLOGY',
+      appSubtitle: 'prosoftvr.com',
+      appDescription: 'Prosoftvr Metaverse Test',
       appSocialLinks: JSON.stringify([
-        { icon: 'static/discord.svg', link: 'https://discord.gg/xrf' },
-        { icon: 'static/github.svg', link: 'https://github.com/XRFoundation' }
+        { icon: 'static/discord.svg', link: '' },
+        { icon: 'static/github.svg', link: '' }
       ]),
       themeSettings: JSON.stringify(defaultThemeSettings),
       themeModes: JSON.stringify(defaultThemeModes)
