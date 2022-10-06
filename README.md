@@ -19,9 +19,6 @@
 - [Releases](https://github.com/XRFoundation/XREngine/releases)
 - [Roadmap](/ROADMAP.md)
 
-## Background
-
-https://user-images.githubusercontent.com/507127/142818955-51d7757f-a432-45da-8f8f-56037358ad58.mp4
 
 We ([Ethereal Engine](https://github.com/xrfoundation)) believe that the Metaverse, 
 Web AR, VR, and XR should be easy.
