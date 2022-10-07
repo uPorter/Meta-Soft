@@ -23,6 +23,8 @@
 
 Hello
 
+Deploy
+
 https://user-images.githubusercontent.com/507127/142818955-51d7757f-a432-45da-8f8f-56037358ad58.mp4
 
 We ([XR Foundation](https://github.com/xrfoundation)) believe that the Metaverse, 
