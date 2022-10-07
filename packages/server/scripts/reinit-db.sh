@@ -1,1 +1,0 @@
-APP_ENV=development FORCE_DB_REFRESH=true node -r ts-node/register ../
